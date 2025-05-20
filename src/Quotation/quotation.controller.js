@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { isAuthenticated, isAuthorized } from "../Middleware/authorization.js";
+import { isAuthorized, isAuthenticate } from "../Middleware/authorization.js";
 import { asyncHandler } from "../Utils/Error/async-handler.js";
 import * as quotationService from "./quotation.service.js";
 const router = Router();
@@ -9,7 +9,7 @@ const router = Router();
  * @method POST
  * @url /quotation
  */
-router.post("/", isAuthorized, asyncHandler(quotationService.addQuotation));
+router.post("/", isAuthenticate, asyncHandler(quotationService.addQuotation));
 
 // update quotation
 /**
@@ -18,7 +18,7 @@ router.post("/", isAuthorized, asyncHandler(quotationService.addQuotation));
  */
 router.put(
   "/:id",
-  isAuthorized,
+  isAuthenticate,
   asyncHandler(quotationService.updateQuotation)
 );
 
@@ -29,7 +29,7 @@ router.put(
  */
 router.delete(
   "/:id",
-  isAuthorized,
+  isAuthenticate,
   asyncHandler(quotationService.deleteQuotation)
 );
 // get quotation
@@ -37,11 +37,11 @@ router.delete(
  * @method GET
  * @url /quotation/:id
  */
-router.get("/:id", isAuthorized, asyncHandler(quotationService.getQuotation));
+router.get("/:id", isAuthenticate, asyncHandler(quotationService.getQuotation));
 // get all quotations
 /**
  * @method GET
  * @url /quotation
  */
-router.get("/", isAuthorized, asyncHandler(quotationService.getAllQuotations));
+router.get("/", isAuthenticate, asyncHandler(quotationService.getAllQuotations));
 export default router;

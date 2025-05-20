@@ -1,7 +1,7 @@
 import { User } from "../DB/Models/user.model.js";
 import { verifyToken } from "../Utils/Token/index.js";
 
-export const isAuthorized = async (req, res, next) => {
+export const isAuthenticate = async (req, res, next) => {
   const { authorization } = req.headers;
   if (!authorization) {
     return next(new Error("Authorization header is missing", { cause: 401 }));
@@ -22,7 +22,7 @@ export const isAuthorized = async (req, res, next) => {
   return next();
 };
 
-export const isAuthenticated =
+export const isAuthorized =
   (role = []) =>
   async (req, res, next) => {
     const { user } = req;
