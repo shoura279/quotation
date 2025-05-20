@@ -21,6 +21,7 @@ export const addQuotation = async (req, res, next) => {
 export const updateQuotation = async (req, res, next) => {
   const { id } = req.params;
   const { name, description, price } = req.body;
+  const { id: userId } = req.user;
   const updatedQuotation = await Quotation.findByIdAndUpdate(
     id,
     { name, description, price, updatedBy: userId },
