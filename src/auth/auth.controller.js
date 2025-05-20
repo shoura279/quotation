@@ -4,7 +4,7 @@ import { login, register } from "./auth.service.js";
 
 const router = Router();
 
-router.post("/register", asyncHandler(register));
+router.post("/signup", asyncHandler(register));
 router.post("/login", asyncHandler(login));
 
 export default router;

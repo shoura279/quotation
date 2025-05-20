@@ -6,7 +6,7 @@ export const isAuthorized = async (req, res, next) => {
   if (!authorization) {
     return next(new Error("Authorization header is missing", { cause: 401 }));
   }
-  const token = authorization.split(" ")[1];
+  const token = authorization.split(" ")[0];
   if (!token) {
     return next(new Error("Token is missing", { cause: 401 }));
   }

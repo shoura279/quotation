@@ -1,5 +1,5 @@
 import { User } from "../DB/Models/user.model.js";
-import { hashPassword } from "../Utils/Hash/index.js";
+import { comparePassword, hashPassword } from "../Utils/Hash/index.js";
 import { generateToken } from "../Utils/Token/index.js";
 
 export const register = async (req, res, next) => {
@@ -26,7 +26,7 @@ export const login = async (req, res, next) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
   if (!user) throw new Error("user not found!");
-  const isPasswordCorrect = await comparePassword(password, user.password);
+  const isPasswordCorrect = comparePassword(password, user.password);
   if (!isPasswordCorrect) throw new Error("invalid password!");
   const token = generateToken({ userId: user._id });
   return res.status(200).json({

@@ -12,7 +12,7 @@ const schema = new Schema(
     },
     price: {
       type: Number,
-      required: true,
+      required: false,
     },
     createdBy: {
       type: Schema.Types.ObjectId,
